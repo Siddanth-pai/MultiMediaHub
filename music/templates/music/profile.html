@@ -1,0 +1,16 @@
+<!--   user is provided by django that represents the current logged in django-->
+
+{% extends "music/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ music.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.user }}</h2>hkjlkjkljlkjljjhjkhjkhhkjhkjhkjlllllllllllllllllllllllllllllllllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
+        </div>
+      </div>
+
+    </div>
+{% endblock content %}

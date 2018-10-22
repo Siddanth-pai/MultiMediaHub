@@ -1,0 +1,19 @@
+{% extends 'music/base.html' %}
+
+{% block body %}
+
+  {% if all_songs %}
+
+  <h3> HERE ARE THE SONGS ON STREAMIT </h3>
+  <ul>
+      {% for song in all_songs %}
+          <li><a href="{% url 'music:detail' song.songid %}">{{ song.songtitle }}</a></li>
+      {% endfor %}
+  </ul>
+  {% else %}
+      <h3>You don't have any albums</h3>
+  {% endif %}
+
+{% endblock %}
+
+<!-- /music/{{ song.songid } -->
