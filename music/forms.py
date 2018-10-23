@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile,Songs
 
 
 class UserRegisterForm(UserCreationForm):
@@ -29,3 +29,9 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields =['image']
+
+
+class AudioForm(forms.ModelForm):
+    class Meta:
+        model = Songs
+        fields=["songid","artist","songtitle","albumtitle","albumlogo","releasedate","genre","audiofile"]

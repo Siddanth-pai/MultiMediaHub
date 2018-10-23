@@ -3,11 +3,19 @@
 
 {% block body %}
 
-    <img src="{{song.albumlogo}}">
+    <img src="{{song.albumlogo.url}}"><!-- .url will give the url to the image in _profile_pics_ -->
 
     <h1>{{song.songtitle}}</h1>
     <h2>Artist : {{song.artist}}</h2>
     <h3>Album : {{song.albumtitle}}</h3>
     <!--<h4>Hits : {{song_play.songhits}}</h4>-->
+
+    <audio controls id="myAudio">
+      <source src="{{MEDIA_URL}}{{song.audiofile}}" type="audio/mp3">
+
+
+        Your browser does not support the audio element.
+    </audio>
+
 
 {% endblock %}

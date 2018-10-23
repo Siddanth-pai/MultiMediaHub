@@ -5,8 +5,8 @@ from . import views
 app_name = 'music'
 urlpatterns = [
     # /music/
-    path('', views.index, name='index'),
-
+    path('', views.index, name = 'index'),
+    path('audi/',views.showaudio,name = 'showaudio'),
     #/music/17/ ---> music/'songid'
     path('<songid>', views.detail, name='detail'),
 ]

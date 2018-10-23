@@ -24,9 +24,10 @@ class Songs(models.Model):
     artist = models.CharField(max_length=100)
     songtitle = models.CharField(max_length=100)
     albumtitle = models.CharField(max_length=100)
-    albumlogo = models.CharField(max_length=100)
+    albumlogo =  models.ImageField(default = 'default.jpg',upload_to='_logo_pics')
     releasedate = models.DateField()
     genre = models.CharField(max_length=100)
+    audiofile= models.FileField(upload_to='audios/',null = True,verbose_name="")
 
     def __str__(self):
         return self.songtitle + ' by ' + self.artist
