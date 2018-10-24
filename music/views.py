@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404,redirect
 #from django.template import loader
 #from django.shortcuts import render
-from .models import Songs,Profile
+from .models import Songs,Profile,Videos
 from django.contrib import messages
 # Create your views here
 from django.contrib.auth.forms import UserCreationForm
@@ -37,7 +37,8 @@ def register(request):
 def index(request):
     #return HttpResponse("<h2><i>This is the Music app homepage</i></h2>")
     all_songs = Songs.objects.all()
-    return render(request, 'music/index.html', {'all_songs': all_songs})
+    all_videos = Videos.objects.all()
+    return render(request, 'music/index.html', {'all_songs': all_songs,'all_videos':all_videos})
     #template = loader.get_template('music/index.html')
     ######
     #DICTIONARY TO STORE INFO THAT TEMPLATE NEEDS
@@ -54,6 +55,7 @@ def index(request):
     #return HttpResponse(template.render(context, request))
     #return render(request, 'music/index.html', {'all_songs': all_songs})
 
+@login_required# decorators add functionality to an existing function
 def detail(request, songid):
 #    try:
 #        song = Songs.objects.get(pk=songid)
@@ -62,6 +64,17 @@ def detail(request, songid):
     #return HttpResponse("<h2> Details for Song ID :" + str(songid) + "</h2>")
     song = get_object_or_404(Songs, pk=songid)
     return render(request, 'music/detail.html', {'song': song} )
+
+
+@login_required
+def videodetail(request, videoid):
+#    try:
+#        song = Songs.objects.get(pk=songid)
+#    except Songs.DoesNotExist:
+#        raise Http404("Song does not exist")
+    #return HttpResponse("<h2> Details for Song ID :" + str(songid) + "</h2>")
+    video = get_object_or_404(Videos, pk=videoid)
+    return render(request, 'music/video_detail.html', {'video': video} )
 
 @login_required# decorators add functionality to an existing function
 def profile(request):
@@ -109,7 +122,7 @@ def profile(request):
 
 
 
-
+@login_required
 def showaudio(request):
     # lastaudio = Songs.objects.all()
   if request.method == 'POST':

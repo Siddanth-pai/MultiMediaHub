@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile,Songs
+from .models import Profile,Songs,Videos
 
 
 class UserRegisterForm(UserCreationForm):
@@ -35,3 +35,16 @@ class AudioForm(forms.ModelForm):
     class Meta:
         model = Songs
         fields=["songid","artist","songtitle","albumtitle","albumlogo","releasedate","genre","audiofile"]
+
+
+
+
+
+
+
+
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Videos
+        fields=["videoid","videotitle","releasedate","videofile"]

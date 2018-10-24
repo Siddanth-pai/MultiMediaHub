@@ -1,0 +1,25 @@
+{% extends 'music/base.html' %}
+{% block title %}Songs{% endblock %}
+
+{% block body %}
+
+    <!-- .url will give the url to the image in _profile_pics_ -->
+
+
+    <!--<h4>Hits : {{song_play.songhits}}</h4>-->
+
+
+    <video width='900' controls>
+     <source src="{{MEDIA_URL}}{{video.videofile}}" type="video/mp4">
+     Your browser does not support the audio element.
+   </video>
+
+
+   <h1>{{video.videotitle}}</h1>
+
+   <h3>releasedate : {{video.releasedate}}</h3>
+
+
+
+
+{% endblock %}

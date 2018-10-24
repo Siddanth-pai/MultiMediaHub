@@ -14,6 +14,20 @@
       <h3>You don't have any albums</h3>
   {% endif %}
 
+
+  {% if all_songs %}
+
+  <h3> HERE ARE THE Videos ON STREAMIT </h3>
+  <ul>
+      {% for video in all_videos %}
+          <li><a href="{% url 'music:detail' video.videoid %}">{{ video.videotitle }}</a></li>
+      {% endfor %}
+  </ul>
+  {% else %}
+      <h3>You don't have any albums</h3>
+  {% endif %}
+
+
 {% endblock %}
 
 <!-- /music/{{ song.songid } -->

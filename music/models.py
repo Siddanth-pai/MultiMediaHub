@@ -34,7 +34,7 @@ class Songs(models.Model):
 #class VideoDetails(models.Model):
 #    videoid = models.ForeignKey(Videos, max_length=1000)
 
-#class SongsDetails(models.Model):
+#class SongsDetails(models.Model):a
 #    songid = models.ForeignKey(Songs, max_length=1000)
 
 class SongDetails(models.Model):
@@ -51,3 +51,22 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+
+
+
+class Videos(models.Model):
+    videoid = models.AutoField(primary_key=True,null=False)
+    #artist = models.CharField(max_length=100)
+    videotitle = models.CharField(max_length=100)
+    #albumtitle = models.CharField(max_length=100)
+    #albumlogo =  models.ImageField(default = 'default.jpg',upload_to='_logo_pics')
+    releasedate = models.DateField()
+    #genre = models.CharField(max_length=100)
+    videofile= models.FileField(upload_to='videos/',null = True,verbose_name="")
+
+
+class VideoDetails(models.Model):
+    videoid = models.ForeignKey('Videos',on_delete=models.CASCADE)
+    videohits = models.IntegerField()
+    username = models.ForeignKey(User,on_delete= models.CASCADE)
