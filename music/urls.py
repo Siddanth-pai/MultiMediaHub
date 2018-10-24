@@ -7,6 +7,8 @@ urlpatterns = [
     # /music/
     path('', views.index, name = 'index'),
     path('audi/',views.showaudio,name = 'showaudio'),
+    path('video/',views.showvideo,name = 'showvideo'),
+
     #/music/17/ ---> music/'songid'
     path('<videoid>', views.videodetail, name='detail'),
     path('<songid>', views.detail, name='detail'),

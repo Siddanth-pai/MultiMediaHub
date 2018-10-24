@@ -6,7 +6,7 @@ from .models import Songs,Profile,Videos
 from django.contrib import messages
 # Create your views here
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,AudioForm
+from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,AudioForm,VideoForm
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
@@ -135,5 +135,22 @@ def showaudio(request):
   else:
        form =  AudioForm()
 
-     #context = {'lastaudio':lastaudio,'form':form}
+
   return render(request,'music/audi.html',{'form':form})
+
+
+@login_required
+def showvideo(request):
+
+    if request.method == 'POST':
+          form = VideoForm(request.POST or None,request.FILES or None)
+          if form.is_valid():
+             form.save()
+             videos = form.cleaned_data.get('songtitle')
+             messages.success(request,f' created for {videos}!')
+             return redirect('music:index')
+    else:
+         form =  VideoForm()
+
+
+    return render(request,'music/video.html',{'form':form})
