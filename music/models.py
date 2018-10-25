@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 from PIL import Image
 #class Users(models.Model):
@@ -28,6 +29,10 @@ class Songs(models.Model):
     releasedate = models.DateField()
     genre = models.CharField(max_length=100)
     audiofile= models.FileField(upload_to='audios/',null = True,verbose_name="")
+    username = models.CharField(max_length=200,null = True)
+
+
+
 
     def __str__(self):
         return self.songtitle + ' by ' + self.artist
@@ -38,9 +43,22 @@ class Songs(models.Model):
 #    songid = models.ForeignKey(Songs, max_length=1000)
 
 class SongDetails(models.Model):
-    songid = models.ForeignKey('Songs',on_delete=models.CASCADE)
-    songhits = models.IntegerField()
-    username = models.ForeignKey(User,on_delete= models.CASCADE)
+    song_id = models.ForeignKey('Songs',on_delete=models.CASCADE,related_name='comments',null=True)
+    #songhits = models.IntegerField()
+    text = models.TextField(null = True)
+    created_date = models.DateTimeField(default=timezone.now)
+    username = models.CharField(max_length=200,null = True)
+
+
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+    #username = models.ForeignKey(User,on_delete= models.CASCADE)
     #is_favourite = models.BooleanField(default=False)
 
 
@@ -69,4 +87,5 @@ class Videos(models.Model):
 class VideoDetails(models.Model):
     videoid = models.ForeignKey('Videos',on_delete=models.CASCADE)
     videohits = models.IntegerField()
-    username = models.ForeignKey(User,on_delete= models.CASCADE)
+    username = models.CharField(max_length=200,null = True)
+    #username = models.ForeignKey(User,on_delete= models.CASCADE)

@@ -9,3 +9,6 @@ body{
 .navbar-brand{
   font-family:'Comic+Sans', cursive;
 }
+.comment {
+    margin: 20px 0px 20px 20px;
+}

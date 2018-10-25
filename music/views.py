@@ -2,11 +2,11 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404,redirect
 #from django.template import loader
 #from django.shortcuts import render
-from .models import Songs,Profile,Videos
+from .models import Songs,Profile,Videos,SongDetails
 from django.contrib import messages
 # Create your views here
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,AudioForm,VideoForm
+from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,AudioForm,VideoForm,SongCommentForm
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
@@ -63,7 +63,8 @@ def detail(request, songid):
 #        raise Http404("Song does not exist")
     #return HttpResponse("<h2> Details for Song ID :" + str(songid) + "</h2>")
     song = get_object_or_404(Songs, pk=songid)
-    return render(request, 'music/detail.html', {'song': song} )
+    comm = SongDetails.objects.all()
+    return render(request, 'music/detail.html', {'song': song,'comm':comm} )
 
 
 @login_required
@@ -154,3 +155,18 @@ def showvideo(request):
 
 
     return render(request,'music/video.html',{'form':form})
+
+
+def add_comment_to_post(request,songid):
+    post = get_object_or_404(Songs,songid=songid)
+    if request.method == 'POST':
+        form = SongCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.song_id = post
+            #return redirect('post_detail', pk=post.pk)
+            comment.save()
+            return redirect('music:detail',songid=post.songid)
+    else:
+        form = SongCommentForm()
+    return render(request, 'music/add_comment_to_post.html', {'form': form})

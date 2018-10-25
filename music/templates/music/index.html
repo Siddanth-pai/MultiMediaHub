@@ -20,7 +20,7 @@
   <h3> HERE ARE THE Videos ON STREAMIT </h3>
   <ul>
       {% for video in all_videos %}
-          <li><a href="{% url 'music:detail' video.videoid %}">{{ video.videotitle }}</a></li>
+          <li><a href="{% url 'music:videodetail' video.videoid %}">{{ video.videotitle }}</a></li>
       {% endfor %}
   </ul>
   {% else %}
