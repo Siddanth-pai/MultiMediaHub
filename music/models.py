@@ -60,7 +60,20 @@ class SongDetails(models.Model):
 
     #username = models.ForeignKey(User,on_delete= models.CASCADE)
     #is_favourite = models.BooleanField(default=False)
+class VideoDetails(models.Model):
+    video_id = models.ForeignKey('Videos',on_delete=models.CASCADE,related_name='vcomments')
+    text = models.TextField(null = True)
+    created_date = models.DateTimeField(default=timezone.now)
 
+    #videohits = models.IntegerField()
+    username = models.CharField(max_length=200,null = True)
+    #username = models.ForeignKey(User,on_delete= models.CASCADE)
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete= models.CASCADE)
@@ -82,10 +95,3 @@ class Videos(models.Model):
     releasedate = models.DateField()
     #genre = models.CharField(max_length=100)
     videofile= models.FileField(upload_to='videos/',null = True,verbose_name="")
-
-
-class VideoDetails(models.Model):
-    videoid = models.ForeignKey('Videos',on_delete=models.CASCADE)
-    videohits = models.IntegerField()
-    username = models.CharField(max_length=200,null = True)
-    #username = models.ForeignKey(User,on_delete= models.CASCADE)

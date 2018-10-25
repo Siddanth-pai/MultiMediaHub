@@ -1,12 +1,13 @@
 from django.http import Http404
+
 from django.shortcuts import render, get_object_or_404,redirect
 #from django.template import loader
 #from django.shortcuts import render
-from .models import Songs,Profile,Videos,SongDetails
+from .models import Songs,Profile,Videos,SongDetails,VideoDetails
 from django.contrib import messages
 # Create your views here
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,AudioForm,VideoForm,SongCommentForm
+from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,AudioForm,VideoForm,SongCommentForm,VideoCommentForm
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
@@ -147,7 +148,7 @@ def showvideo(request):
           form = VideoForm(request.POST or None,request.FILES or None)
           if form.is_valid():
              form.save()
-             videos = form.cleaned_data.get('songtitle')
+             videos = form.cleaned_data.get('videotitle')
              messages.success(request,f' created for {videos}!')
              return redirect('music:index')
     else:
@@ -170,3 +171,18 @@ def add_comment_to_post(request,songid):
     else:
         form = SongCommentForm()
     return render(request, 'music/add_comment_to_post.html', {'form': form})
+
+
+def add_comment_to_post_video(request,videoid):#not working instead redirecting to 
+    post = get_object_or_404(Videos,videoid=videoid)
+    if request.method == 'POST':
+        form = VideoCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.video_id = post
+            #return redirect('post_detail', pk=post.pk)
+            comment.save()
+            return redirect('music:index')
+    else:
+        form = VideoCommentForm()
+    return render(request, 'music/add_comment_to_post_video.html', {'form': form})

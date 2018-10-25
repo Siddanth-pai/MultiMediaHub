@@ -12,7 +12,7 @@ urlpatterns = [
     #/music/17/ ---> music/'songid'
     path('post/<videoid>', views.videodetail, name='videodetail'),
     path('comment/<songid>', views.add_comment_to_post, name='add_comment_to_post'),
-    #path('vcomment/<videoid>', views.add_comment_to_post_video, name='add_comment_to_post_video'),
+    path('post/vcomment/<videoid>', views.add_comment_to_post_video, name='add_comment_to_post_video'),
 
     path('<songid>', views.detail, name='detail'),
 ]

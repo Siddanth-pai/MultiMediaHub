@@ -43,8 +43,11 @@ class SongCommentForm(forms.ModelForm):
         model = SongDetails
         fields = ("text","username")
 
-        
 
+class VideoCommentForm(forms.ModelForm):
+    class Meta:
+        model = VideoDetails
+        fields = ("text","username")
 
 
 
