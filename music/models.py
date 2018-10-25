@@ -79,7 +79,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete= models.CASCADE)
     #image = models.ImageField(default = 'default.jpg',upload_to='_profile_pics')
     image = models.ImageField(default = 'default.jpg',upload_to='_profile_pics')
-
+    #fav_video = models.OneToOneField('Videos',on_delete=models.CASCADE,related_name='vcomments')
+    #fav_audio = models.OneToOneField('Songs',on_delete=models.CASCADE,related_name='comments')
     def __str__(self):
         return f'{self.user.username} Profile'
 
