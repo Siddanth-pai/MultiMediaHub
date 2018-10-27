@@ -6,7 +6,7 @@
   <form  method="POST">
     {% csrf_token  %}
     <fieldset class="form-group">
-      <legend class = "border-bottom mb-4">LOGIN</legend>
+      <legend class = "loginbox">LOGIN</legend>
        <!--{{  form.as_p  }} not required as crispy_forms will take care of it -->
        {{ form|crispy }}
     </fieldset>

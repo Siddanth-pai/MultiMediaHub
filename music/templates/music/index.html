@@ -4,10 +4,14 @@
 
   {% if all_songs %}
 
-  <h3> HERE ARE THE SONGS ON STREAMIT </h3>
+
+  <div class = "button">
+    <a  class = "btn"><h3>HERE ARE THE SONGS ON STREAMIT </h3>   </a>
+  </div>
+
   <ul>
       {% for song in all_songs %}
-          <li><a href="{% url 'music:detail' song.songid %}">{{ song.songtitle }}</a></li>
+          <li><h3><a href="{% url 'music:detail' song.songid %}">{{ song.songtitle }}</a></h3></li>
       {% endfor %}
   </ul>
   {% else %}
@@ -17,10 +21,12 @@
 
   {% if all_songs %}
 
-  <h3> HERE ARE THE Videos ON STREAMIT </h3>
+  <div class = "butt">
+      <a  class="btn"><h3>HERE ARE THE Videos ON STREAMIT</h3>   </a>
+    </div>
   <ul>
       {% for video in all_videos %}
-          <li><a href="{% url 'music:videodetail' video.videoid %}">{{ video.videotitle }}</a></li>
+          <li><h3><a href="{% url 'music:videodetail' video.videoid %}">{{ video.videotitle }}</a></h3></li>
       {% endfor %}
   </ul>
   {% else %}

@@ -34,6 +34,29 @@ def register(request):
         form = UserRegisterForm()
     return render(request,'music/register.html',{'form': form})
 
+@login_required# decorators add functionality to an existing function
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'music/profile.html', context)
 
 def index(request):
     #return HttpResponse("<h2><i>This is the Music app homepage</i></h2>")
@@ -173,7 +196,7 @@ def add_comment_to_post(request,songid):
     return render(request, 'music/add_comment_to_post.html', {'form': form})
 
 
-def add_comment_to_post_video(request,videoid):#not working instead redirecting to 
+def add_comment_to_post_video(request,videoid):#not working instead redirecting to
     post = get_object_or_404(Videos,videoid=videoid)
     if request.method == 'POST':
         form = VideoCommentForm(request.POST)
