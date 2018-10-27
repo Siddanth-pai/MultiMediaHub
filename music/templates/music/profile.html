@@ -3,14 +3,27 @@
 {% extends "music/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-      <div class="media">
-        <img class="rounded-circle account-img" src="{{ music.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.user }}</h2>hkjlkjkljlkjljjhjkhjkhhkjhkjhkjlllllllllllllllllllllllllllllllllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-
-        </div>
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+    <!-- FORM HERE -->
+    <form  method="POST" enctype='multipart/form-data'><!-- entype means encoding type so that images are passed properly....images will not be saved -->
+      {% csrf_token  %}
+      <fieldset class="form-group">
+        <legend class = "border-bottom mb-4">Profile Info</legend>
+         <!--{{  form.as_p  }} not required as crispy_forms will take care of it -->
+         {{ u_form|crispy }}
+         {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button  class="btn btn-outline-info" type="submit">Update</button>
       </div>
 
-    </div>
+    </form>
+  </div>
 {% endblock content %}

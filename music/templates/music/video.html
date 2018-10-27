@@ -1,0 +1,26 @@
+
+{% extends "music/base.html" %}
+
+{% block content %}
+
+<div class='row'>
+  <h1>Video Uploader</h1>
+  <form enctype = "multipart/form-data" class="" action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="" value="Upload"/>
+  </form>
+  <br><br>
+
+
+
+
+
+
+    <br><br>
+
+    <p>Click the buttons to play or pause the audio.</p>
+
+
+
+{% endblock %}

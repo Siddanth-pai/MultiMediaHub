@@ -32,13 +32,15 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'music.apps.MusicConfig',
+    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
+    'crispy_forms',#added
 ]
 
 MIDDLEWARE = [
@@ -62,8 +64,10 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',#added
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -124,6 +128,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')#UPLOADED FILE WILL BE SAVED..........................................
 MEDIA_URL  =  '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'# added by me
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'music:index'#man include 'music' else u r screwed
 LOGIN_URL ='login'#newly added if u r not logged in and try to access the profile.html then u will be redirected to login page
 # after we login it will give us access to the profile page so it is keeping track of it 'http://127.0.0.1:8000/login/?next=/profile/'....

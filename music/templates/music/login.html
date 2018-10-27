@@ -1,0 +1,25 @@
+{% extends "music/base.html" %}
+{% block content %}
+{% load crispy_forms_tags  %}
+  <div class="content-section">
+
+  <form  method="POST">
+    {% csrf_token  %}
+    <fieldset class="form-group">
+      <legend class = "loginbox">LOGIN</legend>
+       <!--{{  form.as_p  }} not required as crispy_forms will take care of it -->
+       {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+      <button  class="btn btn-outline-info" type="submit">LOGIN ;-)</button>
+    </div>
+
+  </form>
+<div class="border-top pt-3">
+  <small class="text-muted">
+    need an Account?<a href={% url 'register' %} class = "ml-2">SignUP</a>
+  </small>
+
+</div>
+  </div>
+{% endblock content %}
